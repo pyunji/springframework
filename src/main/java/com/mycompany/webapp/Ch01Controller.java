@@ -16,5 +16,4 @@ public class Ch01Controller {	// 컨트롤러의 이름과 애노테이션의 �
 		logger.info("실행");
 		return "ch01/content";	// views에서 파일을 찾음
 	}
-
 }
