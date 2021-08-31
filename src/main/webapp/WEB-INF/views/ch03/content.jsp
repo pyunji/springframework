@@ -164,7 +164,6 @@
 					$.ajax({
 						url: "method1",
 						method: "get",
-						// jsp(절대경로 할 때 넣은거)와 javascript 둘다 ${} 를 사용하면 충돌이 난다.
 						data: {
 							
 							// param1:param1, // 속성 이름과 파라미터 이름이 같으면 생략 가능
@@ -203,5 +202,5 @@
 		</div>
 	</div>
 </div>
-
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

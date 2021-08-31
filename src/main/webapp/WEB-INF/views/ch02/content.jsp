@@ -66,7 +66,7 @@
 			</div>
 			<div class="card-body">
 				<%--<form method="POST" action="/ch02/login1">  --%>
-				<form method="POST" action=""${pageContext.request.contextPath}/ch02/modelandview"/ch02/login2">
+				<form method="POST" action="${pageContext.request.contextPath}/ch02/login2">
 				  <div class="form-group">
 				    <label for="exampleInputEmail1">Email address</label>
 				    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

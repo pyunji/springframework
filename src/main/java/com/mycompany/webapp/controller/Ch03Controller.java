@@ -63,7 +63,7 @@ public class Ch03Controller {
 		return "redirect:/ch03/content";
 	}*/
 	
-	/*	@GetMapping("/method1")
+		@GetMapping("/method1")
 		public String method1(Ch03Dto dto){
 			logger.info("실행");
 			logger.info("param1: " + dto.getParam1());
@@ -72,7 +72,7 @@ public class Ch03Controller {
 			logger.info("param4: " + dto.isParam4());
 			logger.info("param5: " + dto.getParam5());
 			return "redirect:/ch03/content";
-		}*/
+		}
 	
 	/*@GetMapping("/method1")
 	public String method1(
