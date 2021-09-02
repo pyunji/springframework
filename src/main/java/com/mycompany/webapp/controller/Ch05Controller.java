@@ -120,8 +120,10 @@ public class Ch05Controller {
 //		jsonObject.put("usertel", "0101231234");
 		jsonObject.put("username", "홍길동");
 		String json = jsonObject.toString(); //큰따옴표 인코딩 하기위해
+		// json: {"usertel":"0101231234","userid":"fall","useremail":"fall@company.com","username":"홍길동"}
 		logger.info("json: " + json);
 		json = URLEncoder.encode(json, "UTF-8");
+		// json: %7B%22usertel%22%3A%220101231234%22%2C%22userid%22%3A%22fall%22%2C%22useremail%22%3A%22fall%40company.com%22%2C%22username%22%3A%22%ED%99%8D%EA%B8%B8%EB%8F%99%22%7D
 		logger.info("json: " + json);
 		
 		Cookie cookie = new Cookie("user", json);
