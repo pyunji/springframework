@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -61,4 +62,70 @@ public class Ch08Controller {
 		String json = jsonObject.toString(); // {"name":"홍길동"}
 		return json;
 	}
+	
+	@GetMapping("/login")
+	public String loginForm() {
+		logger.info("실행");
+		return "ch08/loginForm";
+	}
+	
+	@PostMapping("/login")
+	public String login(String mid, String mpassword, HttpSession session) {
+		logger.info("실행");
+		if(mid.equals("spring") && mpassword.equals("12345")) {
+			session.setAttribute("sessionMid", mid);
+		}
+		return "redirect:/ch08/content";
+	}
+	// 방법 1
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		logger.info("실행");
+		session.removeAttribute("sessionMid");
+		return "redirect:/ch08/loginForm";
+	}
+	
+	// 방법 2 -> 로그아웃 시 사용자의 모든 정보를 없앨 때 씀
+	/*@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		logger.info("실행");
+		session.invalidate(); // 세션 객체 자체가 없어져버림
+		return "redirect:/ch08/loginForm";
+	}*/
+	
+	@PostMapping(value="/loginAjax", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public String loginAjax(String mid, String mpassword, HttpSession session) {
+		logger.info("실행");
+		String result = "";
+		
+		if(!mid.equals("spring")) {
+			result = "wrongMid";
+		} else if (!mpassword.equals("12345")) {
+			result = "wrongMpassword";
+		} else {
+			result = "success";
+			session.setAttribute("sessionMid", mid);
+		}
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", result);
+		String json = jsonObject.toString(); // {"name":"홍길동"}
+		return json;
+	}
+	
+	@GetMapping(value="/logoutAjax", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public String logoutAjax(String mid, String mpassword, HttpSession session) {
+		logger.info("실행");
+	
+		session.invalidate();
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", "success");
+		String json = jsonObject.toString(); // {"name":"홍길동"}
+		return json;
+	}
+	
+	
 }
