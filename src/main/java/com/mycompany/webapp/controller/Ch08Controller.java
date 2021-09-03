@@ -7,13 +7,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import com.mycompany.webapp.dto.Ch08InputForm;
 
 @Controller
 @RequestMapping("/ch08")
+@SessionAttributes({"inputForm"})	// Ch08Controller가 처리하는 내용에 대해서만 세션이 유지된다.
 public class Ch08Controller {
 	private static final Logger logger = LoggerFactory.getLogger(Ch08Controller.class);
 	@RequestMapping("/content")
@@ -125,6 +131,46 @@ public class Ch08Controller {
 		jsonObject.put("result", "success");
 		String json = jsonObject.toString(); // {"name":"홍길동"}
 		return json;
+	}
+	
+	@ModelAttribute("inputForm")
+	// request를 할때마다 실행되는 메서드 -> 클래스 레벨에 붙은 @SessionAttributes로 인해 한 번만 실행되고 해당 객체를 공유함
+	// -> 세션에 "inputForm"이라는 이름이 없을 때만 딱 한 번 실행
+	public Ch08InputForm getInputForm() { 
+		logger.info("실행");
+		Ch08InputForm inputForm = new Ch08InputForm();
+		return inputForm;
+	}
+	
+	@GetMapping("/inputStep1")
+//	public String inputStep1(Ch08InputForm inputForm) { // 이렇게 쓸 경우 요청마다 새로운 inputForm이 만들어져버린다.
+	public String inputStep1(@ModelAttribute("inputForm") Ch08InputForm inputForm) {
+		logger.info("실행");
+		return "ch08/inputStep1";
+	}
+	
+	@PostMapping("/inputStep2")
+	public String inputStep2(@ModelAttribute("inputForm") Ch08InputForm inputForm) {
+		logger.info("실행");
+		logger.info("data1: " + inputForm.getData1());
+		logger.info("data2: " + inputForm.getData2());
+		logger.info("data3: " + inputForm.getData3());
+		logger.info("data4: " + inputForm.getData4());
+		return "ch08/inputStep2";
+	}
+	
+	@PostMapping("/inputDone")
+	public String inputDone(@ModelAttribute("inputForm") Ch08InputForm inputForm, SessionStatus sessionStatus) {
+		logger.info("실행");
+		logger.info("data1: " + inputForm.getData1());
+		logger.info("data2: " + inputForm.getData2());
+		logger.info("data3: " + inputForm.getData3());
+		logger.info("data4: " + inputForm.getData4());
+		// 처리 내용~
+		// 세션에 저장되어있는 inputForm을 제거
+		sessionStatus.setComplete();
+//		session.removeAttribute("inputForm") -> 이런 방식으로 지우면 안됨
+		return "redirect:/ch08/content";
 	}
 	
 	
