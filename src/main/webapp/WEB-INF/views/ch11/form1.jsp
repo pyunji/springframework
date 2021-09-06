@@ -5,26 +5,26 @@
 <div class="card m-2">
     <div class="card-header">DTO 객체(Command Object)와 폼 연결</div>
     <div class="card-body">
-        <form method="post" action="form1">
+        <%-- <form:form method="post" modelAttribute="member" action="form1"> --%>
+        <form:form modelAttribute="member">
             <div class="form-group">
                 <label for="mid">ID</label>
-                <input type="text" class="form-control" id="mid" name="mid">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <form:input type="text" class="form-control" id="mid" path="mid" />
             </div>
             <div class="form-group">
                 <label for="mname">Name</label>
-                <input type="text" class="form-control" id="mname" name="mname">
+                <form:input type="text" class="form-control" id="mname" path="mname"/>
             </div>
             <div class="form-group">
                 <label for="mpassword">Password</label>
-                <input type="password" class="form-control" id="mpassword" name="mpassword">
+                <form:password class="form-control" id="mpassword" path="mpassword"/>
             </div>
             <div class="form-group">
                 <label for="mnation">Nation</label>
-                <input type="text" class="form-control" id="mnation" name="mnation" value="${member.mnation}">
+                <form:input type="text" class="form-control" id="mnation" path="mnation" />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </form:form>
     </div>
 </div>
 

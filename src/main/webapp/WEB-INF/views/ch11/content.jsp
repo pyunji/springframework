@@ -5,10 +5,17 @@
 <div class="card m-2">
     <div class="card-header">Spring Tag Library</div>
     <div class="card-body">
-        <div class="card m-2">
+        <div class="card">
             <div class="card-header">DTO 객체(Command Object)와 폼 연결</div>
             <div class="card-body">
                 <a href="form1" class="btn btn-info btn-sm">form1</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">DTO 객체의 필드값을 양식의 드롭다운리스트(select 태그)로 세팅</div>
+            <div class="card-body">
+                <a href="form2" class="btn btn-info btn-sm">form2</a>
             </div>
         </div>
     </div>
