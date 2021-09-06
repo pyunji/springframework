@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.webapp.dto.Ch11City;
 import com.mycompany.webapp.dto.Ch11Member;
+import com.mycompany.webapp.dto.Ch11Skill;
 
 @Controller
 @RequestMapping("/ch11")
@@ -79,5 +80,29 @@ public class Ch11Controller {
 		// 기본 선택 항목을 설정
 		member.setMcity(3);
 		return "ch11/form2";
+	}
+	
+	@GetMapping("/form3")
+	public String form3(@ModelAttribute("member") Ch11Member member, Model model) {
+		logger.info("실행");
+		
+		List<String> languageList = new ArrayList<>();
+		languageList.add("C");
+		languageList.add("Python");
+		languageList.add("Java");
+		languageList.add("JavaScript");
+		model.addAttribute("languageList", languageList);
+		// 기본 선택 항목을 설정
+		member.setMlanguage(new String[] {"Python", "JavaScript"});
+		
+		List<Ch11Skill> skillList = new ArrayList<>();
+		skillList.add(new Ch11Skill(1, "SpringFramework"));
+		skillList.add(new Ch11Skill(2, "SpringBoot"));
+		skillList.add(new Ch11Skill(3, "Vue"));
+		model.addAttribute("skillList", skillList);
+		// 기본 선택 항목을 설정
+		member.setMskill(new String[] {"SpringFramework", "Vue"});
+
+		return "ch11/form3";
 	}
 }
