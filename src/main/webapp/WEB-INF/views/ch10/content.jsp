@@ -19,6 +19,7 @@
                 <a href="handlingException2" class="btn btn-danger btn-sm">예외 처리2</a>
                 <a href="handlingException3" class="btn btn-danger btn-sm">예외 처리3</a>
                 <a href="handlingException4" class="btn btn-danger btn-sm">예외 처리4</a>
+                <a href="handlingException5" class="btn btn-danger btn-sm">예외 처리5</a>
             </div>
         </div>
         

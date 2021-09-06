@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.webapp.exception.Ch10SoldOutException;
+
 @Controller
 @RequestMapping("/ch10")
 public class Ch10Controller {
@@ -54,6 +56,18 @@ public class Ch10Controller {
 		logger.info("실행");
 		int[] arr = {10, 20, 30};
 		arr[3] = 40; // ArrayIndexOutOfBoundsException
+		return "redirect:/ch10/content";
+	}
+	
+	@RequestMapping("/handlingException5")
+	public String handlingException5(){
+		logger.info("실행");
+
+		int stock = 0;
+		if(stock == 0) {
+			throw new Ch10SoldOutException("상품 재고가 없음");
+		}
+		
 		return "redirect:/ch10/content";
 	}
 }

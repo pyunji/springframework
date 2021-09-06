@@ -33,6 +33,12 @@ public class Ch10ExceptionHandler {
 	}
 	
 	@ExceptionHandler
+	public String handleClassCastException(Ch10SoldOutException e) {
+		logger.info("실행");
+		return "error/soldout";
+	}
+	
+	@ExceptionHandler
 	public String handleException(Exception e) {
 		logger.info("실행");
 		return "error/500";
