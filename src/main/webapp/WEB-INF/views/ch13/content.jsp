@@ -8,6 +8,7 @@
     </div>
     <div class="card-body">
         <a href="request1" class="btn btn-info btn-sm">request1</a>
+        <a href="request2" class="btn btn-info btn-sm">request2</a>
     </div>
 </div>
 
