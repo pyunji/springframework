@@ -21,7 +21,8 @@ public class Ch13Controller {
 	private Ch13Service1 ch13Service1;
 	private Ch13Service2 ch13Service2;
 	
-	@Resource
+	//이름으로 객체를 찾아서 주입
+	@Resource(name="ch13Service3")
 	private Ch13Service ch13Service; // 해당 인터페이스를 구현한 객체가 대입된다.
 	
 	public Ch13Controller() {
@@ -36,7 +37,7 @@ public class Ch13Controller {
 		this.ch13Service1 = ch13Service1;
 	}
 	
-	@Autowired
+	@Autowired // 타입으로 객체를 찾아서 주입
 	public void setCh13Service2(Ch13Service2 ch13Service2) {
 		logger.info("실행");
 		this.ch13Service2 = ch13Service2;
