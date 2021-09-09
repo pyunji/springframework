@@ -1,5 +1,9 @@
 package com.mycompany.webapp.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -120,17 +124,37 @@ public class Ch08Controller {
 		return json;
 	}
 	
-	@GetMapping(value="/logoutAjax", produces="application/json; charset=UTF-8")
+	/*@GetMapping(value="/logoutAjax", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String logoutAjax(String mid, String mpassword, HttpSession session) {
 		logger.info("실행");
 	
-		session.invalidate();
+	//		session.invalidate();
+		session.removeAttribute("sessionMid");
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("result", "success");
 		String json = jsonObject.toString(); // {"name":"홍길동"}
 		return json;
+	}*/
+	
+	@GetMapping(value="/logoutAjax")
+	public void logoutAjax(HttpSession session, HttpServletResponse response) throws IOException {
+		logger.info("실행");
+	
+		session.invalidate(); // 세션을 없애고 만드는 시간보다 밑의 코드를 실행하고 pw를 close하는 시간이 더 빠르기 때문에 에러 발생
+//		session.removeAttribute("sessionMid");
+		
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", "success");
+		String json = jsonObject.toString(); // {"name":"홍길동"}
+
+		pw.println(json);
+//		pw.flush();
+//		pw.close();
 	}
 	
 	@ModelAttribute("inputForm")
