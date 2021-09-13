@@ -13,7 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.mycompany.webapp.dto.Ch14Member;
+import com.mycompany.webapp.service.Ch14MemberService;
+import com.mycompany.webapp.service.Ch14MemberService.JoinResult;
 
 @Controller
 @RequestMapping("/ch14")
@@ -139,6 +144,25 @@ public class Ch14Controller {
 		// 커넥션 풀로 연결 객체를 반납하기 (연결을 끊는 것이 아니라 커넥션 풀로 반납)
 		conn.close();
 		
+		return "redirect:/ch14/content";
+	}
+	@Resource
+	private Ch14MemberService memberService;
+	
+	@PostMapping("/join")
+	public String join(Ch14Member member) {
+		member.setMenabled(1);
+		member.setMrole("ROLE_USER");
+		JoinResult result = memberService.join(member);
+		
+		if (result == JoinResult.SUCCESS) {
+			
+		} else if (result == JoinResult.FAIL) { 
+			
+		} else if (result == JoinResult.SUCCESS) { 
+			
+		}
+		memberService.join(member);
 		return "redirect:/ch14/content";
 	}
 }
