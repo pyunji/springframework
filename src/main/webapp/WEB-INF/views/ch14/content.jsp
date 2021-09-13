@@ -15,6 +15,17 @@
                 <a href="testConnectToDB" class="btn btn-info btn-sm">DB 연결</a>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header">
+                JDBC 연습
+            </div>
+            <div class="card-body">
+                <a href="testInsert" class="btn btn-info btn-sm">testInsert</a>
+                <a href="testSelect" class="btn btn-info btn-sm">testSelect</a>
+                <a href="testUpdate" class="btn btn-info btn-sm">testUpdate</a>
+                <a href="testDelete" class="btn btn-info btn-sm">testDelete</a>
+            </div>
+        </div>
     </div>
 </div>
 
