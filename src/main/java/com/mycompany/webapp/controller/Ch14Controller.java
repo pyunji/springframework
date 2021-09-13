@@ -171,5 +171,19 @@ public class Ch14Controller {
 			return "ch14/joinForm";
 		}
 	}
+	
+	
+
+	@GetMapping("/login")
+	public String loginForm() {
+		/* 과제 */
+		return "ch14/joinForm";
+	}
+	
+	@PostMapping("/login")
+	public String login(Ch14Member member, Model model) {
+		/* 과제 */
+		return "redirect:/ch14/content";
+	}
 
 }

@@ -33,6 +33,7 @@
             </div>
             <div class="card-body">
                 <a href="join" class="btn btn-info btn-sm">회원 가입</a>
+                <a href="join" class="btn btn-info btn-sm">로그인</a>
             </div>
         </div>
     </div>
