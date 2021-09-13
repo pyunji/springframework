@@ -38,6 +38,7 @@ public class Ch14MemberService {
 				return JoinResult.DUPLICATED;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return JoinResult.FAIL;
 		}
 	}
