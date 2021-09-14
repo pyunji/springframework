@@ -5,19 +5,19 @@
 <div class="card m-2">
     <div class="card-header">게시물 목록</div>
     <div class="card-body">
-        <table style="width: auto" class="table table-sm table-bordered">
+        <table class="table table-sm table-bordered">
             <tr>
-                <th style="width: 50px">번호</th>
-                <th style="width: 200px">제목</th>
-                <th style="width: 100px">글쓴이</th>
-                <th style="width: 100px">날짜</th>
+                <th style="width: 30px">번호</th>
+                <th>제목</th>
+                <th style="width: 70px">글쓴이</th>
+                <th style="width: 70px">날짜</th>
             </tr>
 
             <c:forEach var="board" items="${boards}">
                 <tr>
                     <td>${board.bno}</td>
                     <td>
-                        <a href="detailBoard?bno=${board.bno}">${board.btitle}</a>
+                        <a href="boardDetail?bno=${board.bno}">${board.btitle}</a>
                     </td>
                     <td>${board.mid}</td>
                     <td>
@@ -26,6 +26,9 @@
                 </tr>
             </c:forEach>
         </table>
+        <div class="mt-2">
+            <a href="boardWriteForm" class="btn btn-sm btn-info">새글쓰기</a>
+        </div>
     </div>
 </div>
 
