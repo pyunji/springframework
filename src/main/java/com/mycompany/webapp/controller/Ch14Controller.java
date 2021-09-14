@@ -17,9 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.dto.Ch14Board;
 import com.mycompany.webapp.dto.Ch14Member;
+import com.mycompany.webapp.dto.Pager;
 import com.mycompany.webapp.service.Ch14BoardService;
 import com.mycompany.webapp.service.Ch14MemberService;
 import com.mycompany.webapp.service.Ch14MemberService.JoinResult;
@@ -204,9 +206,32 @@ public class Ch14Controller {
 	@Resource
 	private Ch14BoardService boardService;
 	
+	// 300개의 게시물을 넣기 위한 코드
+	/*	boolean isFirst = true;
+		
+		@GetMapping("/boardList")
+		public String boardList(Model model) {
+			if(isFirst) {
+				for (int i = 0; i <= 300; i++) {
+					Ch14Board board = new Ch14Board();
+					board.setBtitle("제목" + i);
+					board.setBcontent("내용" + i);
+					board.setMid("user");
+					boardService.writeBoard(board);
+				}
+				isFirst=false;
+			}
+			List<Ch14Board> boards = boardService.getBoards();
+			model.addAttribute("boards", boards); // request 범위에 저장해야만 jsp에서 쓸 수 있다.
+			return "ch14/boardList";
+		}*/
+
 	@GetMapping("/boardList")
-	public String boardList(Model model) {
-		List<Ch14Board> boards = boardService.getBoards();
+	public String boardList(@RequestParam(defaultValue="1") int pageNo, Model model) {
+		int totalRows = boardService.getTotalBoardNum();
+		Pager pager = new Pager(10, 5, totalRows, pageNo);
+		
+		List<Ch14Board> boards = boardService.getBoards(pager);
 		model.addAttribute("boards", boards); // request 범위에 저장해야만 jsp에서 쓸 수 있다.
 		return "ch14/boardList";
 	}
