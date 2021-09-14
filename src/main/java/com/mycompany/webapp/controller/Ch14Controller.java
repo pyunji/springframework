@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mycompany.webapp.dto.Ch14Member;
 import com.mycompany.webapp.service.Ch14MemberService;
 import com.mycompany.webapp.service.Ch14MemberService.JoinResult;
+import com.mycompany.webapp.service.Ch14MemberService.LoginResult;
 
 @Controller
 @RequestMapping("/ch14")
@@ -177,13 +178,24 @@ public class Ch14Controller {
 	@GetMapping("/login")
 	public String loginForm() {
 		/* 과제 */
-		return "ch14/joinForm";
+		return "ch14/loginForm";
 	}
 	
 	@PostMapping("/login")
 	public String login(Ch14Member member, Model model) {
-		/* 과제 */
-		return "redirect:/ch14/content";
+		LoginResult result = memberService.login(member);
+		if(result == LoginResult.SUCCESS) {
+			return "redirect:/ch14/content";
+		} else if(result == LoginResult.FAIL_MID) {
+			model.addAttribute("error", "아이디가 존재하지 않습니다.");
+			return "ch14/loginForm";
+		} else if(result == LoginResult.FAIL_MPASSWORD) {
+			model.addAttribute("error", "패스워드가 틀립니다.");
+			return "ch14/loginForm";
+		} else {
+			model.addAttribute("error", "알 수 없는 이유로 로그인이 되지 않았습니다. 다시 시도해주세요.");
+			return "ch14/loginForm";
+		}
 	}
 
 }

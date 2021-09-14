@@ -21,6 +21,13 @@ public class Ch14MemberService {
 		DUPLICATED
 	}
 	
+	public enum LoginResult {
+		SUCCESS, 
+		FAIL_MID,
+		FAIL_MPASSWORD,
+		FAIL
+	}
+	
 	@Resource
 	private Ch14MemberDao memberDao;
 	
@@ -42,4 +49,23 @@ public class Ch14MemberService {
 			return JoinResult.FAIL;
 		}
 	}
+	
+	public LoginResult login(Ch14Member member) {
+		try {
+			// 이미 가입된 아이디인지 확인
+			Ch14Member dbMember = memberDao.selectByMid(member.getMid()); // SELECT * FROM member WHERE mid=?
+		
+			// 확인 작업
+			if(dbMember == null) {
+				return LoginResult.FAIL_MID;
+			} else if(!dbMember.getMpassword().equals(member.getMpassword())){
+				return LoginResult.FAIL_MPASSWORD;
+			} else {
+				return LoginResult.SUCCESS;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return LoginResult.FAIL;
+		}
+	}	
 }

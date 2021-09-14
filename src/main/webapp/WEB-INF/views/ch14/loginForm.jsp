@@ -19,12 +19,6 @@
             </div>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">mname</span>
-                </div>
-                <input type="text" name="mname" class="form-control">
-            </div>
-            <div class="input-group">
-                <div class="input-group-prepend">
                     <span class="input-group-text">mpassword</span>
                 </div>
                 <input type="text" name="mpassword" class="form-control">
