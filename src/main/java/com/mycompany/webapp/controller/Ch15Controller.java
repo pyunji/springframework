@@ -123,7 +123,7 @@ public class Ch15Controller {
 	@GetMapping("/boardList")
 	public String boardList(Model model) {
 		logger.info("실행");
-		Pager pager = new Pager(10, 5, boardService.getTotalBoardNum(), 1);
+		Pager pager = new Pager(5, 5, boardService.getTotalBoardNum(), 1);
 		List<Ch14Board> boards = boardService.getBoards(pager);
 		model.addAttribute("boards", boards);
 		return "ch15/boardList";

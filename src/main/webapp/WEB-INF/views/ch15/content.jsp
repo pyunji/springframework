@@ -22,7 +22,7 @@
                 <a href="runtimeCheck" class="btn btn-info btn-sm">요청 처리 시간 측정</a>
                 <a href="javascript:boardList()" class="btn btn-info btn-sm">인증 여부 확인</a>
                 <hr />
-                <div>${methodName}실행시간: ${howLong}</div>
+                <div>${methodName} 실행시간: ${howLong}</div>
                 <hr/>
                 <div id="boardList"></div>
             </div>
@@ -31,8 +31,13 @@
             	$.ajax({
             		url: "boardList"
             	}).done(data => {
+            		if(data.result === "loginNeed") {
+            			// $("#boardList").html("로그인 필요") // 로그인 필요하다고 메세지 띄우는 방법
+            			window.location.href="login"; // 로그인 폼 get 요청 
+            		} else {
             			$("#boardList").html(data);
-            	}
+            		}
+            	})
             }
             </script>
         </div>
