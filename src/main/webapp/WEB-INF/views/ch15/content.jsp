@@ -20,11 +20,38 @@
             <div class="card-header">AOP 예제</div>
             <div class="card-body">
                 <a href="runtimeCheck" class="btn btn-info btn-sm">요청 처리 시간 측정</a>
-                <a href="authCheck" class="btn btn-info btn-sm">인증 여부 확인</a>
+                <a href="javascript:boardList()" class="btn btn-info btn-sm">인증 여부 확인</a>
+                <hr />
+                <div>${methodName}실행시간: ${howLong}</div>
                 <hr/>
-                <div>${methodName} 실행시간: ${howLong}</div>
+                <div id="boardList"></div>
+            </div>
+            <script>
+            function boardList() {
+            	$.ajax({
+            		url: "boardList"
+            	}).done(data => {
+            			$("#boardList").html(data);
+            	}
+            }
+            </script>
+        </div>
+
+        <div class="card">
+            <div class="card-header">form을 통한 login 처리</div>
+            <div class="card-body">
+                <c:if test="${sessionMid == null}">
+                    <a href="login" class="btn btn-info btn-sm">로그인 폼 요청</a>
+                    <!-- 로그인이 되지 않았을 때만 보여야 함 -->
+                </c:if>
+                <!-- else문은 없다. -->
+                <c:if test="${sessionMid != null}">
+                    <a href="logout" class="btn btn-info btn-sm">로그아웃</a>
+                </c:if>
+                <!-- else문은 없다. -->
             </div>
         </div>
+
     </div>
 </div>
 
