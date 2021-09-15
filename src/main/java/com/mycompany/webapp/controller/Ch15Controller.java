@@ -1,9 +1,17 @@
 package com.mycompany.webapp.controller;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.mycompany.webapp.dto.Ch14Board;
+import com.mycompany.webapp.dto.Pager;
+import com.mycompany.webapp.service.Ch14BoardService;
 
 @Controller
 @RequestMapping("/ch15")
@@ -50,9 +58,14 @@ public class Ch15Controller {
 		return "redirect:/ch15/content";
 	}
 	
+	@Resource
+	private Ch14BoardService boardService;
+	
 	@RequestMapping("/runtimeCheck")
 	public String runtimeCheck() {
 		logger.info("실행");
+		Pager pager = new Pager(10, 5, boardService.getTotalBoardNum(), 1);
+		List<Ch14Board> boards = boardService.getBoards(pager);
 		return "redirect:/ch15/content";
 	}
 

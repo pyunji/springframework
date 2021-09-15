@@ -21,6 +21,8 @@
             <div class="card-body">
                 <a href="runtimeCheck" class="btn btn-info btn-sm">요청 처리 시간 측정</a>
                 <a href="authCheck" class="btn btn-info btn-sm">인증 여부 확인</a>
+                <hr/>
+                <div>${methodName} 실행시간: ${howLong}</div>
             </div>
         </div>
     </div>
