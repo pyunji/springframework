@@ -16,8 +16,8 @@
 			username-parameter="mid"
 			password-parameter="mpassword"
 			login-processing-url="/login"
-			always-use-default-target="true"
-			default-target-url="/ch17/content"
+			always-use-default-target="false"
+			default-target-url="/"
 			authentication-failure-url="/ch17/loginForm"
 			/>
 		
