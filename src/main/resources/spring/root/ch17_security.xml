@@ -11,15 +11,26 @@
 	<!-- 인증 절차를 설정 -->
 	<security:http>
 		<!-- 인증 방식 설정: Form 인증 방식 -->
+		<!--
 		<security:form-login
 			login-page="/ch17/loginForm"
 			username-parameter="mid"
 			password-parameter="mpassword"
 			login-processing-url="/login"
 			always-use-default-target="false"
-			default-target-url="/"
+			default-target-url="/ch17/content"
 			authentication-failure-url="/ch17/loginForm"
-			/>
+			/> 
+			-->
+		
+		<security:form-login
+			login-page="/ch17/loginForm"
+			username-parameter="mid"
+			password-parameter="mpassword"
+			login-processing-url="/login"
+			authentication-success-handler-ref="authenticationSuccessHandler"
+			authentication-failure-handler-ref="authenticationFailureHandler"
+			/> 
 		
 		<!-- 로그아웃 설정 -->
 		<security:logout 
@@ -90,6 +101,18 @@
 								data-source-ref="dataSource"
 								users-by-username-query="SELECT mid, mpassword, menabled FROM member WHERE mid=?"
 								authorities-by-username-query="SELECT mid, mrole FROM member WHERE mid=?"/>
+	
+	<!-- 인증 성공 또는 실패시 실행되는 핸들러 객체 설정 -->
+	<bean id="authenticationSuccessHandler" class="com.mycompany.webapp.security.Ch17AuthenticationSuccessHandler">
+		<!-- 로그인 성공 후 이동할 경로 -->
+		<property name="alwaysUseDefaultTargetUrl" value="false"/>
+		<property name="defaultTargetUrl" value="/"/>
+	</bean>
+	
+	<bean id="authenticationFailureHandler" class="com.mycompany.webapp.security.Ch17AuthenticationFailureHandler">
+		<!-- 로그인 실패후 리다이렉트로 이동할 경로 -->
+		<property name="defaultFailureUrl" value="/ch17/loginForm"/>
+	</bean>
 </beans>
 
 
