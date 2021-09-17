@@ -9,6 +9,7 @@
 			<div class="alert alert-danger mb-2" role="alert">아이디 또는 패스워드가 틀립니다.</div>
 		</c:if>
 		<form method="post" action="${pageContext.request.contextPath}/login">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<div class="form-group">
 				<label for="mid">Member ID</label>
 				<input type="text" class="form-control" id="mid" name="mid">

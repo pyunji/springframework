@@ -27,7 +27,8 @@
 			logout-success-url="/ch17/content"/>
 			
 		<!-- 사이트간 요청 위조 방지 비활성화 -->
-		<security:csrf disabled="true"/>
+		<!-- logout도 post 방식으로 요청(_csrf의 토큰을 전달해야함) -->
+		<security:csrf disabled="false"/>
 		
 		<!-- 요청 URL 권한 설정 -->
 		<security:intercept-url pattern="/ch17/admin*" access="hasRole('ROLE_ADMIN')"/>

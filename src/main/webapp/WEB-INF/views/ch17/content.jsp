@@ -12,7 +12,14 @@
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
-					<a href="${pageContext.request.contextPath}/logout" class="btn btn-info btn-sm">로그아웃</a>
+					<%-- 사이트간 요청 위조 방지가 비활성화 되어있을 경우 --%>
+					<%-- <a href="${pageContext.request.contextPath}/logout" class="btn btn-info btn-sm">로그아웃</a> --%>
+					
+					<%-- 사이트간 요청 위조 방지가 활성화 되어있을 경우 --%>
+					<form action="${pageContext.request.contextPath}/logout" method="post">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						<button class="btn btn-info btn-sm">로그아웃</button>
+					</form>
 				</sec:authorize>
 			</div>
 		</div>
