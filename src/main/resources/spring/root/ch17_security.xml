@@ -38,6 +38,26 @@
 		
 		<!-- 권한 없음일 경우 보여줄 페이지 설정 -->
 		<security:access-denied-handler error-page="/ch17/error403"/>
+		
+		<!-- 로그인 중복 방지를 위한 설정 -->
+		<security:session-management>
+			<!-- 
+			max-sessions: 최대 로그인 수
+			error-if-maximum-exceeded="true": 최대 로그인 수를 초과했을 경우 에러 발생: 다른 곳에서 로그인 할 수 없음
+			expired-url: 인증이 무효화된 사용자가 이동하는 페이지
+			 -->
+			
+			<!-- 이전 로그인을 유효하게 만들기 -->
+			<!-- 
+			<security:concurrency-control max-sessions="1"
+								error-if-maximum-exceeded="true"/>
+			-->
+			
+			<!-- 최종 로그인을 유효하게 만들기 -->
+			<security:concurrency-control max-sessions="1" 
+								error-if-maximum-exceeded="false" 
+								expired-url="/ch17/loginForm"/>
+		</security:session-management>
 	</security:http>
 	
 	<!-- 권한 계층 설정 -->

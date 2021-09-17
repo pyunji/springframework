@@ -6,7 +6,14 @@
 	<div class="card-header">로그인 폼</div>
 	<div class="card-body">
 		<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
-			<div class="alert alert-danger mb-2" role="alert">아이디 또는 패스워드가 틀립니다.</div>
+			<div class="alert alert-danger mb-2" role="alert">
+				<c:if test="${SPRING_SECURITY_LAST_EXCEPTION.message == 'Bad credentials'}">
+					아이디 또는 비밀번호가 틀립니다.
+				</c:if>
+				<c:if test="${fn:contains(SPRING_SECURITY_LAST_EXCEPTION.message, 'principal exceeded')}">
+					인증 횟수가 초가되었습니다.
+				</c:if>
+			</div>
 		</c:if>
 		<form method="post" action="${pageContext.request.contextPath}/login">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
