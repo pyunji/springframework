@@ -33,9 +33,13 @@
 			/> 
 		
 		<!-- 로그아웃 설정 -->
-		<security:logout 
+		<!-- <security:logout 
 			logout-url="/logout"
-			logout-success-url="/ch17/content"/>
+			logout-success-url="/ch17/content"/> -->
+		<security:logout
+			logout-url="/logout"
+			success-handler-ref="logoutSuccessHandler"
+		/>
 			
 		<!-- 사이트간 요청 위조 방지 비활성화 -->
 		<!-- logout도 post 방식으로 요청(_csrf의 토큰을 전달해야함) -->
@@ -113,22 +117,10 @@
 		<!-- 로그인 실패후 리다이렉트로 이동할 경로 -->
 		<property name="defaultFailureUrl" value="/ch17/loginForm"/>
 	</bean>
+	
+	<bean id="logoutSuccessHandler"
+		class="com.mycompany.webapp.security.Ch17LogoutSuccessHandler">
+		<!-- 로그아웃 성공시 리다이렉트로 이동할 경로 -->
+		<property name="defaultTargetUrl" value="/ch17/content"/>
+	</bean>
 </beans>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
