@@ -5,6 +5,7 @@ public class ClassYu {
 	//필드 선언
 	private int hy1;
 	private int cy1;
+	private int hy2;
 	//메소드 선언
 	private int ABC;
 }
