@@ -7,6 +7,7 @@ public class ClassYu {
 	private int cy1;
 	private int hy2;
 	private int hj1;
+	private int hy3;
 	//메소드 선언
 	private int ABC;
 }
